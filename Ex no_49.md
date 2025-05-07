@@ -59,8 +59,7 @@ void search(char data)
 ```
 
 ## Output:
-![Screenshot 2025-05-07 184002](https://github.com/user-attachments/assets/44d4dd95-682c-4562-ac0b-460a8dbc8d58)
-
+![Screenshot 2025-05-07 184925](https://github.com/user-attachments/assets/13912765-60e9-48b9-a1d6-49c5047527be)
 
 
 ## Result:
