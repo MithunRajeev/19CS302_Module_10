@@ -14,61 +14,105 @@ To write a C functions to perform all basic operations in Doubly Linked List.
    
 ## Program:
 ```
-#include <stdio.h>
-#include <stdlib.h>
 struct Node
 {
+    struct Node *prev;
+    struct Node *next;
     char data;
-    struct Node* prev;
-    struct Node* next;
-};
-struct Node* head = NULL;
-void insert(char value)
-{
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node*));
-    newNode->data = value;
-    newNode->prev = newNode->next = NULL;
-]
-    if (head == NULL)
-    {
-        head = newNode;
-        return;
-    }
-    struct Node* temp = head;
-    while (temp->next != NULL)
-        temp = temp->next;
-    temp->next = newNode;
-    newNode->prev = temp;
-}
-void delete()
- {
-    if (head == NULL)
-    {
-        printf("List is empty\n");
-        return;
-    }
-    struct Node* temp = head;
-    if (temp->next == NULL)
-    {
-        free(head);
-        head = NULL;
-        return;
-    }
-    while (temp->next != NULL)
-        temp = temp->next;
-
-    temp->prev->next = NULL;
-    free(temp);
- }
+}*head;
 void display()
 {
-    struct Node* temp = head;
-    while (temp != NULL)
+    struct Node *ptr;
+    ptr = head;
+    while(ptr != NULL)
     {
-        printf("%c ", temp->data);
-        temp = temp->next;
+        printf("%c ",ptr->data);
+        ptr=ptr->next;
     }
-    printf("\n");
+}
+void insert(char data)
+{
+   struct Node *ptr,*temp;
+   ptr=(struct Node *)malloc(sizeof(struct Node));
+   if(ptr==NULL)
+   {
+       printf("OVERFLOW\n");
+   }
+   else
+   {
+       ptr->data=data;
+       if(head==NULL)
+       {
+           ptr->next=NULL;
+           ptr->prev=NULL;
+           head=ptr;
+       }
+       else
+       {
+          temp=head;
+          while(temp->next!=NULL)
+          {
+              temp=temp->next;
+          }
+          temp->next=ptr;
+          ptr->prev=temp;
+          ptr->next=NULL;
+        }
+    }
+}
+void search(char data)
+{
+    struct Node *ptr;
+    char item=data;
+    int i=0,flag;
+    ptr=head;
+    if(ptr==NULL)
+    {
+    printf("Empty List\n");
+    }
+    else
+    {
+       while(ptr!=NULL)
+        {
+            if(ptr->data==item)
+            {
+                printf("item %c found at location %d\n",item,i+1);
+                flag=0;
+            }
+             else
+            {
+               flag=1;
+            }
+            i++;
+            ptr=ptr->next;
+        }
+        if(flag!=0)
+        {
+            printf("Item not found\n");
+        }
+    }
+}
+void delete()
+{
+    struct Node *ptr;
+    if(head==NULL)
+    {
+        printf("UNDERFLOW\n");
+    }
+    else if(head->next==NULL)
+    {
+        head=NULL;
+        free(head);
+        printf("Node deleted\n");
+    }
+    else
+    {
+        ptr=head;
+        head=head->next;
+        head->prev=NULL;
+        free(ptr);
+        printf("Node deleted\n");
+    }
 }
 ```
 
